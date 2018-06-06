@@ -135,6 +135,7 @@ public class Expression_Tree<T extends Comparable<T>> {
 	
 	public void printQ() {
 		this.queue.print();
+		System.out.println(" ");
 	}
 	
 	/*
