@@ -73,7 +73,12 @@ public class Expression_Tree<T extends Comparable<T>> {
 					this.queue.enqueue(recieved.charAt(i));
 				}
 	
-			}else {
+			}else if(recieved.charAt(i) == ' ') {
+				/*
+				 * Hace nada, no se agrega ni a la cola ni a la pila
+				 */
+			}
+			else {
 				throw new Exception("Inserte un valor válido");
 			}
 		}
@@ -210,7 +215,7 @@ public class Expression_Tree<T extends Comparable<T>> {
 	
 	public static void main(String[] args) throws Exception {
 		Expression_Tree tree = new Expression_Tree<>();
-		tree.stackORQueue("(a+(b*c))+(((d*e)+f)*g)");
+		tree.stackORQueue("(a + (b*c)) + (((d * e) + f) * g)");
 		tree.printQ();
 		tree.order();
 		tree.printT();
@@ -218,9 +223,18 @@ public class Expression_Tree<T extends Comparable<T>> {
 		System.out.println(" ");
 		
 		Expression_Tree tree1 = new Expression_Tree<>();
-		tree1.stackORQueue("a*(b+c)+8");
+		tree1.stackORQueue("a*(b+c)+d");
 		tree1.printQ();
 		tree1.order();
 		tree1.printT();
+		System.out.println(" ");
+		System.out.println(" ");
+		
+		
+		Expression_Tree tree2 = new Expression_Tree<>();
+		tree2.stackORQueue("(x+y) * (a-b)");
+		tree2.printQ();
+		tree2.order();
+		tree2.printT();
 	}
 }
