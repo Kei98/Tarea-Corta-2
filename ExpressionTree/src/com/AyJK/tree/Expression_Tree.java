@@ -52,8 +52,8 @@ public class Expression_Tree<T extends Comparable<T>> {
 				
 			/*
 			 * Si aparece un parétesis de cierre en la expresión ingresada, se añaden los elementos
-			 * de la pila a la cola, hasta que se encuentre nuevamente con un paréntesis, pero debe ser
-			 * de inicio 
+			 * de la pila a la cola, hasta que se encuentre nuevamente con un paréntesis, pero 
+			 * debe ser de inicio 
 			 */
 			}else if (recieved.charAt(i) == ')') {
 				while((char) this.stack.peek() != '(') {
@@ -66,7 +66,13 @@ public class Expression_Tree<T extends Comparable<T>> {
 				this.stack.pop();
 				this.count--;
 			}else if(isOperand(recieved.charAt(i))) {
-				this.queue.enqueue(recieved.charAt(i));
+				
+				if((i <= (recieved.length() - 2)) && isOperand(recieved.charAt(i+1))) {
+					throw new Exception("No se puede insertar un operando que no sea de un solo elemento");
+				}else {
+					this.queue.enqueue(recieved.charAt(i));
+				}
+	
 			}else {
 				throw new Exception("Inserte un valor válido");
 			}
@@ -176,7 +182,7 @@ public class Expression_Tree<T extends Comparable<T>> {
 	
 	/**
 	 *  Método que retorna si el caracter indicado es un operando, se considera operando
-	 *  si es un número entero positivo cualquiera o si es una letra minúscula
+	 *  si es un número entero positivo entre 0 y 9 o si es una letra minúscula
 	 * 
 	 * @param whatever
 	 * 
@@ -208,5 +214,13 @@ public class Expression_Tree<T extends Comparable<T>> {
 		tree.printQ();
 		tree.order();
 		tree.printT();
+		System.out.println(" ");
+		System.out.println(" ");
+		
+		Expression_Tree tree1 = new Expression_Tree<>();
+		tree1.stackORQueue("a*(b+c)+8");
+		tree1.printQ();
+		tree1.order();
+		tree1.printT();
 	}
 }
